@@ -1,21 +1,27 @@
 \documentclass[12pt,a4paper]{book}
+% Kodowanie znaków
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{polski}
 \usepackage[polish]{babel}
+
+%Wygląd i typografia
 \usepackage{courier}
 \usepackage{graphicx}
 \graphicspath{ {images/} }
 \usepackage{mathtools}
 \usepackage{hyperref}
 \usepackage{indentfirst}
-\usepackage[backend=biber,style=alphabetic,sorting=ynt]{biblatex}
 \usepackage[top=2.54cm,bottom=2.54cm,left=2.00cm,right=2.0cm,includehead,head=0.6cm,headsep=0.499cm,includefoot,foot=0.6cm,footskip=1.099cm]{geometry}
+
+% Bibliografia
+\usepackage{biblatex}
 \addbibresource{references.bib}
+
 \begin{document}
 \frontmatter
 \includegraphics[width=15.949cm,height=7.645cm]{logo-qgis3}	
-\title{System informacji geograficznej QGIS w przykładach}
+\title{System informacji geograficznej \Huge{QGIS} w przykładach}
 \author{Tomasz Nycz \\Bartłomiej Szypuła, \\Śląskie Laboratorium GIS}
 \date{}
 \maketitle
@@ -126,15 +132,11 @@ Zakładka Układ współrzędnych jest bardzo istotna dla komfortu pracy z zbior
 \subsection{Moduły}
 Aby w pełni wykorzystać możliwości jakie daje współczesne środowisko pracy GIS, szczególnie w wersji open-source warto skorzystać z dodatkowych modułów. Szczególnie praktyczną jest integracja z SAGA GIS, oraz GRASS.
 
-Jeśli korzystasz z systemu operacyjnego Windows, skorzystaj z wspomnianego wcześniej instalatora OSGeo4W i wybierz pakiety SAGA, GRASS.
-
-Dla systemów Unix'owych, konieczna jest instalacja z pakietów, np. dla Ubuntu/Debiana:
-
+Jeśli korzystasz z systemu operacyjnego Windows, skorzystaj z wspomnianego wcześniej instalatora OSGeo4W i wybierz pakiety SAGA, GRASS. Dla systemów Unix'owych, konieczna jest instalacja z pakietów, np. dla Ubuntu/Debiana:
 
 sudo add-apt-repository ppa:johanvdw/saga-gis 
-\\sudo apt-get update
-\\sudo apt-get install saga qgis-plugin-grass grass-core
-
+sudo apt-get update
+sudo apt-get install saga qgis-plugin-grass grass-core
 
 Następnie pobierz pakiet LASTools ze strony producenta: \url{https://rapidlasso.com/lastools/} i rozpakuj do katalogu, zapisując ścieżkę dostępu.
 
@@ -360,14 +362,14 @@ Gdy zachodzi konieczność zapisania do nowego zbioru danych które utworzyliśm
 \end{figure}
 \end{center}
 W przypadku warstwy wektorowej po wprowadzeniu nazwu (np. przy użyciu przycisku **Przeglądaj**), oraz wskazaniu
-docelowego układu współrzędnych, możemy wybrać również docelowe kodowanie tekstu (preferowane UTF-8), oraz jeśli tworzona wartstwa jest selekcją z innej, powinniśmy zaznaczyć opcję  Zapisz tylko wybrane . Pozostałe pozycje w oknie zależą od kontekstu formatu warstwy wektorowej i mogą pozostać domyślne, *{\textquotedbl}jeśli nie wiesz co oznaczają{\textquotedbl}*.
+docelowego układu współrzędnych, możemy wybrać również docelowe kodowanie tekstu (preferowane UTF-8), oraz jeśli tworzona wartstwa jest selekcją z innej, powinniśmy zaznaczyć opcję  Zapisz tylko wybrane . Pozostałe pozycje w oknie zależą od kontekstu formatu warstwy wektorowej i mogą pozostać domyślne, \textit{jeśli nie wiesz co oznaczają}.
 
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=14.372cm]{002-zapisz-wektor.jpg}
-\caption{Okno zapisu warstwy wektorowej}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=13cm,height=14.372cm]{002-zapisz-wektor.jpg}
+	\caption{Okno zapisu warstwy wektorowej}
 \end{figure}
-\end{center}
+
 Dla warstwy rastrowej ilośc opcji jest trochę większa. Możemy między innymi zmienić rozdzielczość warstwy wynikowej, (podaną w jednostkach CRS wybranego powyżej - uwaga przy układach geograficznych, jednostkami są stopnie). Możemy również włączyć kompresję oraz przygotować piramidy skalowe.
 
 \begin{center}
@@ -1491,25 +1493,17 @@ Ustawienia elementu \textit{podziałka} zaprezentujemy na cyklu ilustracji.
 \end{figure}
 \end{center}
 
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=6.033cm,height=2.117cm]{008-podzialka-liniowa.jpg}
-\caption{Podziałka liniowa}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=6.033cm,height=2.117cm]{008-podzialka-liniowa.jpg}
+	\caption{Podziałka liniowa}
 \end{figure}
-\end{center}
-W przypadku stylu podziałki \textbf{Numeryczna }obiekt podziałki będzie miał charakter tekstowy o wartości mianownika skali. Będzie go więc można wykorzystać do opisu pozaramkowego. Po dodaniu legendy możemy również sterować jej ustawieniami w odpowiedniej zakładce. Pamiętajmy przy tym że dużo wygodniej jest tworzyć legendę, gdy stylizacja warstw jest poprawnie opisana na poziomie głównego okna programu. W zakładce \textbf{Pozycje legendy }znajdziemy pozycję \textit{Aktualizuj},która jest domyślnie aktywna. Jej wyłączenie\textbf{ }spowoduje aktywację dolnego paska narzędziowego, pozwalającego na samodzielne dodanie i usunięcie elementów legendy, lecz jednocześnie nie będzie aktualizowało wyglądu tego obiektu, po zmianach w głównym oknie mapy. W dolnej części, w pasku narzędziowym znajdziemy również ikonę z symbolem \textit{lejka}. Odfiltrowuje ona obiekty, niewidoczne na arkuszu wydruku przy zadanej skali i zasięgu. Zmniejszy to ogólny rozmiar obiektu legendy i uprości jego osadzenie.
-
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=8.502cm,height=16.535cm]{008-ustawienia-legendy.png}
-\caption{Ustawienia legendy}
+\ \ W przypadku stylu podziałki \textbf{Numeryczna }obiekt podziałki będzie miał charakter tekstowy o wartości mianownika skali. Będzie go więc można wykorzystać do opisu pozaramkowego. Po dodaniu legendy możemy również sterować jej ustawieniami w odpowiedniej zakładce. Pamiętajmy przy tym że dużo wygodniej jest tworzyć legendę, gdy stylizacja warstw jest poprawnie opisana na poziomie głównego okna programu. W zakładce \textbf{Pozycje legendy }znajdziemy pozycję \textit{Aktualizuj},która jest domyślnie aktywna. Jej wyłączenie\textbf{ }spowoduje aktywację dolnego paska narzędziowego, pozwalającego na samodzielne dodanie i usunięcie elementów legendy, lecz jednocześnie nie będzie aktualizowało wyglądu tego obiektu, po zmianach w głównym oknie mapy. W dolnej części, w pasku narzędziowym znajdziemy również ikonę z symbolem \textit{lejka}. Odfiltrowuje ona obiekty, niewidoczne na arkuszu wydruku przy zadanej skali i zasięgu. Zmniejszy to ogólny rozmiar obiektu legendy i uprości jego osadzenie.
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=12cm]{008-ustawienia-legendy.png}
+	\caption{Ustawienia legendy}
 \end{figure}
-\end{center}
-
-
 \begin{center}
 \begin{figure}
 \includegraphics[width=6.639cm,height=7.267cm]{008-legenda-przyklad.png}
@@ -1538,13 +1532,13 @@ Z tego poziomu możemy również dokonać zmiany w wyglądzie samego elementu (r
 {\bfseries
 Tabele atrybutów}
 
-Dodawanie tabeli wykonujemy w sposób analogiczny, wskazując odpowiednią funkcję, a następnie {\textquotedbl}naciągając{\textquotedbl} tabelę w arkuszu. W przypadku tabel, szczególnie takich o dużej ilości wierszy czasami konieczne jest podzielenie tabeli na kolejne strony. We właściwościach obiektu znajdziemy zakładki \textbf{Filtrowanie},oraz \textbf{Ramkiobiektów},którychmożemy dostosować ustawienia do naszych potrzeb. Należy przy tym pamiętać, że w przypadku wybrania w zakładce Ramki ustawienia \textbf{Zmiana rozmiaru }\textit{Powtarzaj do},\textit{ukończenia} dla każdej kolejnej części tabeli zostanie utworzona kolejna strona arkusza wydruku. Należy ręcznie
+Dodawanie tabeli wykonujemy w sposób analogiczny, wskazując odpowiednią funkcję, a następnie {\textquotedbl}naciągając{\textquotedbl} tabelę w arkuszu. W przypadku tabel, szczególnie takich o dużej ilości wierszy czasami konieczne jest podzielenie tabeli na kolejne strony. We właściwościach obiektu znajdziemy zakładki \textbf{Filtrowanie}, oraz \textbf{Ramki obiektów}, których możemy dostosować ustawienia do naszych potrzeb. Należy przy tym pamiętać, że w przypadku wybrania w zakładce Ramki ustawienia \textbf{Zmiana rozmiaru }\textit{Powtarzaj do},\textit{ukończenia} dla każdej kolejnej części tabeli zostanie utworzona kolejna strona arkusza wydruku. Należy ręcznie
 
 poprawić ułożenie elementów na wybranej przez siebie stronie.
 \begin{center}
 \begin{figure}
-\caption{Dodaj tabelę}
 \includegraphics[width=12.298cm,height=3.637cm]{008-tabela.png}
+\caption{Dodaj tabelę}
 \end{figure}
 \end{center}
 \begin{center}
@@ -1559,14 +1553,12 @@ Operacja dodawania elementów graficznych przebiega analogicznie do dotychczasow
 
 Jedynym istotnym ustawieniem o którym warto tu wspomnieć, a którego nie spotkaliśmy wcześniej to sposób dopasowania grafiki rastrowej do obiektu. Po wybraniu źródła obrazu w zakładce Właściwości, dla ustawienia \textbf{Zmiana rozmiaru} możemy wybrać opcję \textit{powiększ i dopasuj ramkę.}
 
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=12.598cm,height=4.748cm]{008-grafiki.jpg}
-\caption{Dodaj grafikę}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=12.598cm,height=4.748cm]{008-grafiki.jpg}
+	\caption{Dodaj grafikę}
 \end{figure}
-\end{center}
+
 
 
 \begin{center}
@@ -1582,12 +1574,11 @@ Gdy istnieje konieczność wykonania opracowania kartograficznego, w którym chc
 
 Aby utworzyć atlas, przechodzimy do panelu \textbf{Atlas}, aktywujemy pole \textbf{Generuj atlas,} a następnie wskazujemy w \textit{Warstwa opracowania}, z której warstwy wektorowej będziemy korzystać z tworzenia kolejnych arkuszy.
 
-\begin{center}
-\begin{figure}
-\caption{Ustawienia atlasu}
-\includegraphics[width=10.597cm,height=7.786cm]{008-atlas.png}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=7.0cm]{008-atlas.png}
+	\caption{Ustawienia atlasu}
 \end{figure}
-\end{center}
 Przy pomocy pola \textit{filtruj} możemy dodatkowo odsiać elementy które zostaną wykorzystane. W naszym przypadku tworzymy atlas gmin powiatu gliwickiego i w tym celu filtrowanie realizujemy względem poziomu podziału administracyjnego. Jeśli chcemy utworzyć atlas zwartego obszaru (np. miasta), konieczne będzie wcześniejsze wygenerowanie siatki prostokątów, o zasięgach poszczególnych arkuszy i wskazanie jej jako warstwy opracowania, korzystając jednocześnie z checkbox'a \textbf{ukryj warstwę opracowania}. Kolejnym krokiem jaki powinniśmy wykonać, jest wskazanie skali mapy dla kolejno tworzonych arkuszy. Ponieważ obiekty z tabeli mogą mieć różne wymiary przestrzenne, QGIS udostępnia nam tutaj trzy możliwości:
 
 \begin{itemize}
@@ -1603,29 +1594,23 @@ Przy pomocy pola \textit{filtruj} możemy dodatkowo odsiać elementy które zost
 \end{itemize}
 W tym miejscu warto wspomnieć o jeszcze jednym elemencie związanym z stylizacją warstw. W dziale poświęconym \textbf{Dopełnianiu poligonów }wspominaliśmy\textbf{ }możliwości utworzenia tzw. maski obiektu. W przypadku atlasu ma to praktyczne zastosowanie. Utwórzmy taki styl warstwy, który dla każdego kolejnego arkusza atlasu będzie tworzył kolejną maskę.
 
-
-
-\begin{center}
 \begin{figure}
-\includegraphics[width=13.998cm,height=6.682cm]{008-atlas-reguly.jpg}
-\caption{Reguły mapy oparte o funkcje atlasu}
+	\centering
+	\includegraphics[width=11.0cm]{008-atlas-reguly.jpg}
+	\caption{Reguły mapy oparte o funkcje atlasu}
 \end{figure}
-\end{center}
-Dodajemy do naszego stylu kolejną regułę o treści \textbf{\$id = @atlasfeature, }następnie przydzielamy jej gradientowy lub wypełniony styl graficzny.[Warning: Draw object ignored] W wyniku tej operacji uzyskujemy przykładowy arkusz atlasu.
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=9.176cm]{008-atlas-dopelnienie.png}
-\caption{Dopełnienie poligonów w atlasie}
+Dodajemy do naszego stylu kolejną regułę o treści \textbf{\$id = @atlasfeature},  następnie przydzielamy jej gradientowy lub wypełniony styl graficzny. W wyniku tej operacji uzyskujemy przykładowy arkusz atlasu.
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.35]{008-atlas-dopelnienie.png}
+	\caption{Dopełnienie poligonów w atlasie}
 \end{figure}
-\end{center}
 
-\section{Bibliografia}
-
+\section{Źródła internetowe}
 \begin{enumerate}
-\item Strona internetowa projektu http://qgis.com/
+\item Strona internetowa projektu \url{http://qgis.com/}
 \item Free and Open Source GIS Ramblings, \url{https://anitagraser.com/}
-\item Usługa dynami cznego pobierania EU-DEM http://data.eox.at/eudem/
+\item Usługa dynami cznego pobierania EU-DEM \url{http://data.eox.at/eudem/}
 \item Biblioteka obrazów Landsat \url{http://libra.developmentseed.org/}
 \item Sentinel’s Playground http://apps.sentinel-hub.com/sentinel-playground/
 \item Katalog misji satelitarnych z opisem sensorów 
@@ -1634,11 +1619,11 @@ Dodajemy do naszego stylu kolejną regułę o treści \textbf{\$id = @atlasfeatu
 \item Baza danych PostgreSQL - \url{https://www.postgresql.org}
 \item Podstawy PostGIS \url{http://workshops.boundlessgeo.com/postgis-intro/}
 \end{enumerate}
+
+\printbibliography
 \setcounter{tocdepth}{10}
 \renewcommand\contentsname{Spis treści}
 \tableofcontents
-\begin{enumerate}
-\item[] \end{enumerate}
 \end{document}
 
 

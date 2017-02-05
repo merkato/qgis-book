@@ -1,2 +1,2 @@
 
-Copyright (C) 2017 merkato
+Copyright (C) 2017 Tomasz Nycz, GIS Beskidy
