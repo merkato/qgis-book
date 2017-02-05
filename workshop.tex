@@ -5,18 +5,21 @@
 \usepackage[polish]{babel}
 \usepackage{courier}
 \usepackage{graphicx}
+\graphicspath{ {images/} }
 \usepackage{mathtools}
 \usepackage{hyperref}
 \usepackage{indentfirst}
+\usepackage[backend=biber,style=alphabetic,sorting=ynt]{biblatex}
 \usepackage[top=2.54cm,bottom=2.54cm,left=2.00cm,right=2.0cm,includehead,head=0.6cm,headsep=0.499cm,includefoot,foot=0.6cm,footskip=1.099cm]{geometry}
-
+\addbibresource{references.bib}
 \begin{document}
 \frontmatter
+\includegraphics[width=15.949cm,height=7.645cm]{logo-qgis3}	
 \title{System informacji geograficznej QGIS w przykładach}
 \author{Tomasz Nycz \\Bartłomiej Szypuła, \\Śląskie Laboratorium GIS}
 \date{}
 \maketitle
-\includegraphics[width=15.949cm,height=7.645cm]{logo-qgis3}
+
 
 % Wstęp do skryptu
 \chapter{Wstęp}
@@ -51,14 +54,12 @@ GIS (System Informacji Geograficznej, System Informacji Przestrzennej) służy o
 
 \chapter{Wprowadzenie do środowiska}
 \section{Interfejs użytkownika}
-\begin{center}
-\begin{figure}
-\includegraphics[width=17cm,height=10.216cm]{001-interfejs.jpg}
-\caption{Główne okno programu}
-\end{figure}
-\end{center}
 Aby dalsza praca z programem przebiegała bezproblemowo, warto zapoznać się z ogólnym układem interfejsu użytkownika QGIS. Na najważniejsze jego elementy składają się:
-
+\begin{figure}[t]
+	\centering
+	\includegraphics[scale=0.45]{001-interfejs.jpg}
+	\caption{Główne okno programu}
+\end{figure}
 \begin{itemize}
 \item menu główne
 \item pasek narzędzi i wtyczek
@@ -67,21 +68,20 @@ Aby dalsza praca z programem przebiegała bezproblemowo, warto zapoznać się z 
 \item pasek stanu mapy
 \item pasek zarządzania warstwami
 \end{itemize}
+\ \ Na kolejnych ilustracjach można zobaczyć przykłady konfiguracji okna programu. Istnieje możliwość skonfigurowania wyglądu głównego okna programu stosownie do potrzeb użytkownika. Każdy z paneli może zostać uwidoczniony w formie samodzielnego doku lub w formie zakładki, zarówno po lewej jak i po prawej stronie głównego okna. Również paski narzędzi mogą zostać umieszczone w dowolnej pozycji. 
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.45]{001-panele.png}
+	\caption{Panel w formie doków}
+\end{figure}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.45]{001-zakladki.jpg}
+	\caption{Panel w formie zakładek}
+\end{figure}
 
-\begin{center}
-\begin{figure}
-\includegraphics[width=13.219cm,height=8.061cm]{001-panele.png}
-\caption{Panel w formie doków}
-\end{figure}
-\end{center}
-Na kolejnych ilustracjach można zobaczyć przykłady konfiguracji okna programu. Panel Styl warstwy dostępny jest dopiero od wersji 2.16.
-\begin{center}
-\begin{figure}
-\includegraphics[width=12.961cm,height=7.426cm]{001-zakladki.jpg}
-\caption{Panel w formie zakładek}
-\end{figure}
-\end{center}
-Stopniowo rozwijane możliwości programu powodują dodawanie stale nowych funkcjonalności do interefejsu użytkownika. Przykładem są tu \textbf{Obrót} który pojawił się od wersji 2.6 oraz \textbf{Magnifier} od wersji 2.14. Służą one do zmiany obrazu mapy, bez zmiany skali wizualizacji, czy dostosowania orientacji mapy do interesującego nas obszaru.
+\ \ Stopniowo rozwijane możliwości programu powodują dodawanie stale nowych funkcjonalności do interfejsu użytkownika. Przykładem są tu \textbf{Obrót} który pojawił się od wersji 2.6 oraz \textbf{Magnifier} od wersji 2.14. Służą one do zmiany obrazu mapy, bez zmiany skali wizualizacji, czy dostosowania orientacji mapy do interesującego nas obszaru. Panel Styl warstwy dostępny jest dopiero od wersji 2.16. 
+W wersji 3.0 pojawi się również narzędzie do szybkiego przełączania widoczności paneli [Ctrl+TAB]
 
 \subsection{Ustawienia środowiska pracy}
 Przed rozpoczęciem dalszej pracy omówimy konfigurację środowiska pracy, instalację najpraktyczniejszych modułów i wtyczek do QGIS. Pozwoli na to na wydajniejszą i pozbawioną niespodziewanych problemów dalszą pracę.
@@ -1171,8 +1171,8 @@ W wyniku tej operacji wszystkie elementy naszej wizualizacji o zgodnym filtrze, 
 \caption{Dopełnienie poligonów - przykład wizualizacji}
 \end{figure}
 \end{center}
-\subsubsection{Mapa skupień}
-\ \ Określenie \textbf{Mapa Skupień} funkcjonuje również w polskich opracowaniach jako \textbf{Mapa} \textbf{ciepła}. Punktowe wystąpienia zjawiska przetwarzane są na informację barwną o gęstości. Dotychczas konieczne było realizowanie tej funkcji przy pomocy narzędzi z menu  Raster . Obecnie całość zadania możemy zrealizować przy pomocy wyboru odpowiedniego typu renderera.
+\subsection{Mapa skupień}
+Określenie \textbf{Mapa Skupień} funkcjonuje również w polskich opracowaniach jako \textbf{Mapa} \textbf{ciepła}, lub metoda Kernel Density \cite{ESRI}. Punktowe wystąpienia zjawiska przetwarzane są na informację barwną o gęstości. Dotychczas konieczne było realizowanie tej funkcji przy pomocy narzędzi z menu  Raster . Obecnie całość zadania możemy zrealizować przy pomocy wyboru odpowiedniego typu renderera.
 
 
 \begin{center}
@@ -1181,7 +1181,7 @@ W wyniku tej operacji wszystkie elementy naszej wizualizacji o zgodnym filtrze, 
 \caption{Mapa skupień - ustawienia}
 \end{figure}
 \end{center}
-W oknie dialogowym ustawiamy kolorystykę, następnie wartość \textbf{Promień}(im mniejsza tym bardziej szczegółowo widać sąsiadujące punkty, oraz \textbf{Waga z} ,\textbf{atrybutu}którypozwala jeszcze wyróżnić konkretny typ zjawiska.
+W oknie dialogowym ustawiamy kolorystykę, następnie wartość \textbf{Promień}(im mniejsza tym bardziej szczegółowo widać sąsiadujące punkty, oraz \textbf{Waga z atrybutu} który pozwala jeszcze wyróżnić konkretny typ zjawiska.
 
 
 \begin{center}
@@ -1412,7 +1412,7 @@ Następne w ustawieniach naszego arkusza to ramka opisowa i siatka kartograficzn
 
 \begin{center}
 \begin{figure}
-\includegraphics[width=10.372cm,height=21.643cm]{008-siatki.png}
+\includegraphics[height=15.5cm]{008-siatki.png}
 \caption{Siatka kartograficzna - ustawienia}
 \end{figure}
 \end{center}
@@ -1621,13 +1621,15 @@ Dodajemy do naszego stylu kolejną regułę o treści \textbf{\$id = @atlasfeatu
 \end{center}
 
 \section{Bibliografia}
+
 \begin{enumerate}
 \item Strona internetowa projektu http://qgis.com/
 \item Free and Open Source GIS Ramblings, \url{https://anitagraser.com/}
 \item Usługa dynami cznego pobierania EU-DEM http://data.eox.at/eudem/
 \item Biblioteka obrazów Landsat \url{http://libra.developmentseed.org/}
 \item Sentinel’s Playground http://apps.sentinel-hub.com/sentinel-playground/
-\item Katalog misji satelitarnych z opisem sensorów \ \ \url{https://eoportal.org/web/eoportal/satellite-missions}
+\item Katalog misji satelitarnych z opisem sensorów 
+\\ \url{https://eoportal.org/web/eoportal/satellite-missions}
 \item SCP - Półautomatyczna klasyfikacja zdjęć \url{http://fromgistors.blogspot.com/}
 \item Baza danych PostgreSQL - \url{https://www.postgresql.org}
 \item Podstawy PostGIS \url{http://workshops.boundlessgeo.com/postgis-intro/}
@@ -1638,3 +1640,5 @@ Dodajemy do naszego stylu kolejną regułę o treści \textbf{\$id = @atlasfeatu
 \begin{enumerate}
 \item[] \end{enumerate}
 \end{document}
+
+
