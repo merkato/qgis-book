@@ -4,9 +4,11 @@
 \usepackage[T1]{fontenc}
 \usepackage{polski}
 \usepackage[polish]{babel}
+\usepackage{csquotes}
 
 %Wygląd i typografia
 \usepackage{courier}
+\usepackage{tgpagella}
 \usepackage{graphicx}
 \graphicspath{ {images/} }
 \usepackage{mathtools}
@@ -15,17 +17,16 @@
 \usepackage[top=2.54cm,bottom=2.54cm,left=2.00cm,right=2.0cm,includehead,head=0.6cm,headsep=0.499cm,includefoot,foot=0.6cm,footskip=1.099cm]{geometry}
 
 % Bibliografia
-\usepackage{biblatex}
+\usepackage[backend=biber]{biblatex}
 \addbibresource{references.bib}
 
 \begin{document}
 \frontmatter
 \includegraphics[width=15.949cm,height=7.645cm]{logo-qgis3}	
-\title{System informacji geograficznej \Huge{QGIS} w przykładach}
+\title{System informacji geograficznej \\\Huge{QGIS} \\w przykładach}
 \author{Tomasz Nycz \\Bartłomiej Szypuła, \\Śląskie Laboratorium GIS}
 \date{}
 \maketitle
-
 
 % Wstęp do skryptu
 \chapter{Wstęp}
@@ -45,14 +46,13 @@ http://qgis.org/en/site/forusers/download.html
 
 Dla użytkowników systemu operacyjnego Windows proponujemy wybór instalatora OSGeo4W w wersji 64bit, który pozwoli na sprawną instalację pakietu QGIS, bibliotek GDAL, python, modułów GRASS i SAGA, a także innego użytecznego oprogramowania GIS.
 
-
 \mainmatter
 \chapter{Kilka słów o QGIS}
 GIS (System Informacji Geograficznej, System Informacji Przestrzennej) służy oczywiście do tworzenia map - ale... pozwala również na zapytania przestrzenne, analizy przestrzenne, statystyki przestrzennego rozpowszechnienia zjawisk...
 
 \ \ Przykładowo, chcielibyśmy wskazać lokalizację szpitali w województwie, ale również zestawienie tabelaryczne pokazujące odległość z najbliższego szpitala do większych miejscowości. Czasami dane są bardziej użyteczne niż sama mapa.
 
-\ \ QGIS jest otwarto-źródłowym (open source), dostępnym bezpłatnie do pobrania i dalszej dystrybucji pakietem GIS. Powstał w 2002 roku, obecnie ma aktywną społeczność deweloperów, oraz użytkowników. Jest również szeroko wykorzystywany w środowisku organizacji humanitarnych. Dzięki swojej architekturze posiada silne wsparcie (również wielu instytucji komercyjnych, oraz integruje się wyjątkowo dobrze z innymi pakietami otwarto-źródłowymi takimi jak PostGreSQL/PostGIS i GeoServer. Wykorzystując jako elementy biblioteki takie jak OGR i GDAL, otwiera się na większość aktywnie użytkowanych na świecie formatów danych przestrzennych z liderami rynku komercyjnego: shapefile, KML i MapInfo TAB, czy bardzo niszowymi zamkniętymi rozwiązaniami. Szacowany koszt opracowania oprogramowania w maju 2015 wyceniany był na 9.904 mln USD \footnote{http://www.openhub.net/p/qgis/estimated\_cost}
+\ \ QGIS jest otwarto-źródłowym (open source), dostępnym bezpłatnie do pobrania i dalszej dystrybucji pakietem GIS. Powstał w 2002 roku, obecnie ma aktywną społeczność deweloperów, oraz użytkowników. Jest również szeroko wykorzystywany w środowisku organizacji humanitarnych. Dzięki swojej architekturze posiada silne wsparcie (również wielu instytucji komercyjnych, oraz integruje się wyjątkowo dobrze z innymi pakietami otwarto-źródłowymi takimi jak PostgreSQL/PostGIS i GeoServer. Wykorzystując jako elementy biblioteki takie jak OGR i GDAL, otwiera się na większość aktywnie użytkowanych na świecie formatów danych przestrzennych z liderami rynku komercyjnego: shapefile, KML i MapInfo TAB, czy bardzo niszowymi zamkniętymi rozwiązaniami. Szacowany koszt opracowania oprogramowania w maju 2015 wyceniany był na 9.904 mln USD \footnote{http://www.openhub.net/p/qgis/estimated\_cost}
 
 \ \ Chociaż QGIS jest dostępny do użytku bez żadnych opłat, jako projekt polega on na użytkownikach, programistach oraz sponsorach, którzy mogą wspierać rozwój najlepiej jak potrafią - więcej o tym opowiemy na końcu.
 
@@ -61,7 +61,7 @@ GIS (System Informacji Geograficznej, System Informacji Przestrzennej) służy o
 \chapter{Wprowadzenie do środowiska}
 \section{Interfejs użytkownika}
 Aby dalsza praca z programem przebiegała bezproblemowo, warto zapoznać się z ogólnym układem interfejsu użytkownika QGIS. Na najważniejsze jego elementy składają się:
-\begin{figure}[t]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[scale=0.45]{001-interfejs.jpg}
 	\caption{Główne okno programu}
@@ -75,12 +75,12 @@ Aby dalsza praca z programem przebiegała bezproblemowo, warto zapoznać się z 
 \item pasek zarządzania warstwami
 \end{itemize}
 \ \ Na kolejnych ilustracjach można zobaczyć przykłady konfiguracji okna programu. Istnieje możliwość skonfigurowania wyglądu głównego okna programu stosownie do potrzeb użytkownika. Każdy z paneli może zostać uwidoczniony w formie samodzielnego doku lub w formie zakładki, zarówno po lewej jak i po prawej stronie głównego okna. Również paski narzędzi mogą zostać umieszczone w dowolnej pozycji. 
-\begin{figure}[ht]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[scale=0.45]{001-panele.png}
 	\caption{Panel w formie doków}
 \end{figure}
-\begin{figure}[ht]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[scale=0.45]{001-zakladki.jpg}
 	\caption{Panel w formie zakładek}
@@ -91,42 +91,35 @@ W wersji 3.0 pojawi się również narzędzie do szybkiego przełączania widocz
 
 \subsection{Ustawienia środowiska pracy}
 Przed rozpoczęciem dalszej pracy omówimy konfigurację środowiska pracy, instalację najpraktyczniejszych modułów i wtyczek do QGIS. Pozwoli na to na wydajniejszą i pozbawioną niespodziewanych problemów dalszą pracę.
-
-Rozpoczniemy od wybrania z menu głównego programu Ustawienia -{\textgreater} Opcje. Pojawi się nam okno opcji konfiguracyjnych programu. Przejdźmy do zakładki System. 
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13.014cm,height=9.282cm]{002-zakladka-system.png}
-\caption{Ustawienia - Zakładka System}
+\ \ Rozpoczniemy od wybrania z menu głównego programu Ustawienia -{\textgreater} Opcje. Pojawi się nam okno opcji konfiguracyjnych programu. Przejdźmy do zakładki System. 
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=13.014cm,height=9.282cm]{002-zakladka-system.png}
+	\caption{Ustawienia - Zakładka System}
 \end{figure}
-\end{center}
 W pierwszym polu od góry \textbf{Ścieżki do SVG }wskazujemy ścieżkę dostępu do katalogu w którym znajdują się nasze repozytoria symboli kartograficznych. Szczególnie przy redakcji kartograficznej, oraz współdzieleniu projektów jest to wygodne rozwiązanie, pozwalające na stosowanie relatywnych odwołań do plików. Następną istotną zakładką jest \textbf{Renderowanie}.
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13.014cm,height=9.275cm]{002-zakladka-renderowanie.jpg}
-\caption{Ustawienia - Zakładka Renderowanie}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[scale=0.4]{002-zakladka-renderowanie.jpg}
+	\caption{Ustawienia - Zakładka Renderowanie}
 \end{figure}
-\end{center}
+
 W tej zakładce możemy dostosować ustawienia związane z prędkością i jakością renderowania podglądu mapy w oknie głównym. W grupie Właściwości wyświetlania szczególnie istotnym jest pozycja \textbf{Wykorzystaj wiele} \textbf{rdzeni CPU.} Grupa Domyślnie włącz upraszczanie dla nowo dodawanych warstw powinna pozostać wyłączona, jeśli chcemy pracować z danymi topologicznymi, albo stosować przyciąganie (snapping).
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=17cm,height=8.562cm]{002-zakladka-narzedzia.jpg}
-\caption{Ustawienia - Zakładka Narzędzia Mapy}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[scale=0.4]{002-zakladka-narzedzia.jpg}
+	\caption{Ustawienia - Zakładka Narzędzia Mapy}
 \end{figure}
-\end{center}
+
 W zakładce Kolory możemy zarządzać dostępnymi paletami barwnymi, np. przygotowując wcześniej zdefiniowany zestaw kolorów dla mapy/projektu. W zakładce tej możemy również zaimportować pliki palet barwnych, zgodnych z formatem Gimp Palette.
 
 W zakładce Narzędzia mapy znajdują się pola dla zdefiniowania wyglądu obiektów zaznaczonych, linijki pomiarowej, jednostek miary. W grupie Zdefiniowane skale możemy wprowadzić skale mapy, które mają być stosowane np. przy tworzeniu atlasu.
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=16.997cm,height=11.19cm]{002-zakladka-uklad.jpg}
-\caption{Ustawienia - Zakładka Układ Współrzędnych}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.4]{002-zakladka-uklad.jpg}
+	\caption{Ustawienia - Zakładka Układ Współrzędnych}
 \end{figure}
-\end{center}
+
 Zakładka Układ współrzędnych jest bardzo istotna dla komfortu pracy z zbiorami danych. W grupie Domyślny układ współrzędnych dla nowych projektów warto ustawić opcję oznaczoną cyfrą 1 (\textit{Automatycznie włącz reprojekcję w l} \textit{współrzędnych}),oraz wybrać listy (lub ikonką globusa po prawej, jeśli na liście nie ma) preferowany przez nas układ i odwzorowanie. Na ilustracji widać wybór układu 1992. Cyfrą 2 w grupie Układ współrzędnych dla nowych warstw oznaczona jest pozycja, którą warto ustawić, gdy często mamy do czynienia z zbiorami danych stworzonymi uprzednio w pakiecie ArcGIS, który pozwala na zapisanie Shapefile bez definicji układu. Tu również możemy wskazać domyślny układ.
 
 \subsection{Moduły}
@@ -134,28 +127,25 @@ Aby w pełni wykorzystać możliwości jakie daje współczesne środowisko prac
 
 Jeśli korzystasz z systemu operacyjnego Windows, skorzystaj z wspomnianego wcześniej instalatora OSGeo4W i wybierz pakiety SAGA, GRASS. Dla systemów Unix'owych, konieczna jest instalacja z pakietów, np. dla Ubuntu/Debiana:
 
-sudo add-apt-repository ppa:johanvdw/saga-gis 
-sudo apt-get update
-sudo apt-get install saga qgis-plugin-grass grass-core
-
-Następnie pobierz pakiet LASTools ze strony producenta: \url{https://rapidlasso.com/lastools/} i rozpakuj do katalogu, zapisując ścieżkę dostępu.
-
-Istnieje również możliwość skorzystania z pakietu Fusion/LDV opracowanego przez Departament Rolnictwa USA: \url{http://forsys.cfr.washington.edu/fusion/fusionlatest.html} Gdy mamy już przygotowane pakiety, wybieramy z menu QGIS Geoprocessing -{\textgreater} Opcje i z zakładki Narzędzia do danych LiDAR wybieramy \textbf{Aktywuj }a następnie wprowadzamy ścieżki dostępu do wcześniej zainstalowanego Fusion/LDV i LASTools (oba pakiety są opcjonalne i niewymagane do pracy).
-
-
-
 \begin{center}
-\begin{figure}
-\includegraphics[width=16.838cm,height=12.457cm]{002-lidar.jpg}
-\caption{Konfiguracja modułów LiDAR w Ubuntu}
-\end{figure} 
+sudo add-apt-repository ppa:johanvdw/saga-gis 
+\\sudo apt-get update
+\\sudo apt-get install saga qgis-plugin-grass grass-core
 \end{center}
+Następnie pobierz pakiet LASTools ze strony producenta \cite{lastools} i rozpakuj do katalogu, zapisując ścieżkę dostępu.
+
+Istnieje również możliwość skorzystania z pakietu Fusion/LDV opracowanego przez Departament Rolnictwa USA \cite{fusion} Gdy mamy już przygotowane pakiety, wybieramy z menu QGIS Geoprocessing -{\textgreater} Opcje i z zakładki Narzędzia do danych LiDAR wybieramy \textbf{Aktywuj }a następnie wprowadzamy ścieżki dostępu do wcześniej zainstalowanego Fusion/LDV i LASTools (oba pakiety są opcjonalne i niewymagane do pracy).
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=16.838cm,height=12.457cm]{002-lidar.jpg}
+	\caption{Konfiguracja modułów LiDAR w Ubuntu}
+\end{figure}
 Następnie w zakładce SAGA również korzystamy z pola \textbf{Włącz}. W Ubuntu dodatkowo wypełniamy ścieżkę dostępu do pliku wykonywalnego pakietu Wine (wymagany dla poprawnej pracy LASTools).
 
 Jeśli ustawione przez nas parametry są już poprawne zatwierdzamy klawiszem \textbf{OK},, następuje sprawdzenie konfiguracji i możemy przystąpić do dalszej pracy.
 
 Inne dostępne moduły:
-
 \begin{itemize}
 \item TauDEM - \url{http://hydrology.usu.edu/taudem/taudem5/index.html}
 \item Orfeo Toolbox - \url{https://www.orfeo-toolbox.org/}
@@ -165,35 +155,27 @@ Inne dostępne moduły:
 \subsection{Modelarz graficzny}
 Rozszerzenie Processing udostępnia również tzw. modelarz graficzny. Pozwala on w graficznym interfejsie użytkownika stworzyć łańcuch narzędzi, oraz zbiorów danych,i wskazać kolejność ich przetwarzania. Istnieje również możliwość ich zapisania do ponownego wykorzystania. Szczególnie przydatne jest to przy przetwarzaniu danych pochodzących ze skanowania laserowego czy interpolacji danych wektorowych do postaci rastrowej.
 
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=12.562cm,height=9.229cm]{002-modelarz.jpg}
-\caption{Modelarz graficzny}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=7cm]{002-modelarz.jpg}
+	\caption{Modelarz graficzny}
 \end{figure}
-\end{center}
 \subsection[Wtyczki]{Wtyczki}
 QGIS wykorzystuje w swoim działaniu modułową budowę, opartą o biblioteki działające w tle takie jak GDAL/OGR, python-qgis, rdzeń programu realizujący zarządzanie procesami, oraz rozszerzające funkcjonalność wtyczki (plugins), dostępne w QGIS Plugins Repository.
 
 \ \ Zawiera ono setki wtyczek, niektóre z nich oznaczone jako eksperymentalne - pamiętaj, że mogą one nie działać tak jakbyś chciał. Aby móc skorzystać z tej funkcjonalności, konieczny jest zainstalowany interpreter języka Python (dla Windows najlepiej skorzystaj z instalatora OSGeo4W). Następnie w QGIS wybieramy opcję menu Wtyczki -{\textgreater} Zarządzaj wtyczkami
 
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=3.14cm]{002-wtyczki-zarzadzanie.jpg}
-\caption{Zarządzanie wtyczkami}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=2.5cm]{002-wtyczki-zarzadzanie.jpg}
+	\caption{Zarządzanie wtyczkami}
 \end{figure}
-\end{center}
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13.014cm,height=8.311cm]{002-wtyczki-repo.jpg}
-\caption{Repozytorium wtyczek}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=7.5cm]{002-wtyczki-repo.jpg}
+	\caption{Repozytorium wtyczek}
 \end{figure}
-\end{center}
+
 Po otwarciu okna wybieramy zakładkę Ustawienia.
 
 Przy jej pomocy możemy włączyć dostęp do wtyczek eksperymentalnych, lub niezalecanych, a także samodzielnie zdefiniować zewnętrzne repozytoria wtyczek (plugins) QGIS.
@@ -216,12 +198,11 @@ W naszym przypadku zainstalujemy następujące wtyczki:
 \end{center}
 Upewnimy się również czy włączony został Georeferencer GDAL.
 
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=7.592cm]{002-wtyczki-instalacja.png}
-\caption{Instalacja wtyczek}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=7cm]{002-wtyczki-instalacja.png}
+	\caption{Instalacja wtyczek}
 \end{figure}
-\end{center}
 \section{Projekt}
 W środowisku QGIS \textbf{Projekt }jest zbiorem warstw, stylizacji, arkuszy kompozera wydruków, a także reguł, zapytań bazodanowych zapisanych do ponownego użycia. Dlatego tak istotnym jest zrozumienie i prawidłowe wykorzystanie jego możliwości. W tym bloku omówimy konfigurację projektu, tworzenie metadanych, definiowanie układów współrzędnych, oraz projektowe ustawienia serwera usług sieciowych.
 Po uruchomieniu QGIS w wersji LTR środowisko przygotowane jest do pracy z nowym projektem, zaś od wersji 2.14 w oknie mapy wyświetlana jest lista ostatnio otwartych projektów, do szybkiego otwarcia. Przy tym otwarcie dowolnej warstwy danych przywraca okno mapy i można rozpocząć pracę.
@@ -237,22 +218,17 @@ Pod cyfrą dwa kryje się opcja \textbf{Zapisz ścieżki} która może być bard
 
 Pod pozycją trzy możemy zdefiniować \textbf{Skale projektu}
 
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=6.858cm]{002-projekt.png}
-\caption{Właściwości projektu}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=6cm]{002-projekt.png}
+	\caption{Właściwości projektu}
 \end{figure}
-\end{center}
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=6.862cm]{002-projekt-ows.jpg}
-\caption{Metadane i ustawienia serwera OWS}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=6cm]{002-projekt-ows.jpg}
+	\caption{Metadane i ustawienia serwera OWS}
 \end{figure}
-\end{center}
+
 W przypadku skorzystania z zakładki \textbf{Serwer OWS możemy }zdefiniować komplet metadanych publikowanych przy pomocy usług sieciowych WMS, WFS, WCS. W polach WMS Capabilities, WFS Capabilities możemy wybrać sposób publikowania warstw danych (dostępność układów współrzędnych, zasięg rozgłaszany, etc.)
 
 \subsection{CRS}
@@ -260,14 +236,12 @@ W zakładce Układ współrzędnych możemy wybrać z listy istniejący układ w
 
 W przypadku popularnych odwzorowań i układów współrzędnych (np. WGS84, UTM) jest to bardzo proste i wygodne rozwiązanie. Niestety w przypadku map archiwalnych, czy dla nietypowych obszarów, system odniesień przestrzennych (CRS) może nie być zdefiniowany w bazie kodów EPSG. Wtedy koniecznym staje się jego samodzielne utworzenie. Aby to uczynić z wybieramy z menu programu Ustawienia -{\textgreater} Układ współrzędnych użytkownika. Po otwarciu okna z prawej strony u góry widoczny jest przycisk z zielonym symbolem +. Na ilustracji oznaczony został cyfrą jeden.
 
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13.998cm,height=8.809cm]{002-crs.jpg}
-\caption{Tworzenie definicji CRS}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=7cm]{002-crs.jpg}
+	\caption{Tworzenie definicji CRS}
 \end{figure}
-\end{center}
+
 Po kliknięciu w ten przycisk w pole nazwa wpisujemy własną nazwę układu, zaś w pole parametry informację zgodną z definicją dla biblioteki PROJ.4. Każdy z parametrów rozpoczyna się symbolem +, z wartością za znakiem =. Symbol +k\_0 oznacza zmniejszenie skali na południku osiowym.
 
 Przykładowa, widoczna na ilustracji definicja układu odpowiada parametrom układu współrzędnych Wojskowego Instytutu Geograficznego, za wyjątkiem definicji odwzorowania (odwzorowanie Rousillhe'a nie jest obsługiwane w tym miejscu programu), konieczne jest więc skorzystanie z odwzorowania stereograficznego. W przykładzie wskazana jest również elipsoida Bessela. Po zakończeniu wprowadzania, mamy możliwość przetestowania poprawności transformacji dla znanych współrzędnych. Na koniec wybieramy opcję \textbf{OK}.Jeśli definicja układu jest poprawna, okno zostanie zamknięte i CRS będzie dostępny do wykorzystania w pozostałych miejscach programu.
@@ -276,92 +250,75 @@ Przykładowa, widoczna na ilustracji definicja układu odpowiada parametrom ukł
 \ \ W kolejnym bloku zajęć poruszymy tematykę prostych operacji otwierania, zapisywania, czy transformacji układu zbiorów.
 
 \subsection{Otwieranie warstwy}
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=10.929cm,height=1.058cm]{002-pasek-warstwy.jpg}
-\caption{Pasek zarządzania warstwami}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=1cm]{002-pasek-warstwy.jpg}
+	\caption{Pasek zarządzania warstwami}
 \end{figure}
-\end{center}
 Z lewej strony okna programu standardowo widoczny jest pionowy pasek zarządzania warstwami. Na ilustracji powyżej, pasek ten został odpięty z swojego miejsca i obrócony do orientacji poziomej. Operacja ta została wykonana dla zwiększenia czytelności i nie wpływa na funkcjonalność tego narzędzia.
 
 W tym rozdziale zaprezentujemy kolejno sposób otwierania zbiorów danych dostępnych w QGIS. Kolejność ta będzie zgodna z widocznymi ikonkami.
-
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=11.698cm,height=5.75cm]{002-dodaj-wektor.jpg}
-\caption{Dodawanie warstwy wektorowej}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=5cm]{002-dodaj-wektor.jpg}
+	\caption{Dodawanie warstwy wektorowej}
 \end{figure}
-\end{center}
+
 W przypadku warstwy wektorowej otworzy się okno z niewielką ilością opcji.Dla zbiorów w formatach Shapefile, GeoJSON, DXF, czy innych plikowych powinniśmy skorzystać z Typ źródła danych -{\textgreater} Plik.
 
 Dla geobazy \textit{.gdb (ArcGIS)} właściwą opcją jest typ\textit{\textbf{Katalog}}.
 
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13.335cm,height=7.437cm]{002-dodaj-ogdb.png}
-\caption{Dodawanie warstwy wektorowej - geobaza}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=6cm]{002-dodaj-ogdb.png}
+	\caption{Dodawanie warstwy wektorowej - geobaza}
 \end{figure}
-\end{center}
+
 Konieczne jednak w tym momencie jest wskazanie również podtypu źródła danych. Dla geobazy wybieramy OpenFileGDB.
 
 W przypadku formatów danych które pozwalają na przechowywanie w jednym zbiorze wielu tabel, lub wielu typów geometrii, takich jak **GeoJSON, GPX** czy właśnie geobaza, zobaczymy kolejne okno, wyboru warstw do dodania. Każda zaznaczona warstwa zostanie zaczytana do wykorzystania w programie.
 
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=5.779cm]{002-typ-geometrii.jpg}
-\caption{Selekcja warstw zbioru z wieloma typami geometrii}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=5cm]{002-typ-geometrii.jpg}
+	\caption{Selekcja warstw zbioru z wieloma typami geometrii}
 \end{figure}
-\end{center}
+
 Kolejnym jest format danych rastrowych. Tutaj operacja jest dużo prostsza, każdy z dostepnych formatów obsługiwany jest identycznie, poprzez okno wyboru pliku.
 
 W przypadku baz danych (Spatialite, PostGIS, Oracle Spatial, MSSQL) okno otwarcia jest podobne, różni się wyłącznie opcjami specyficznymi dla wybranej bazy.
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=11.077cm]{002-dodaj-postgis.png}
-\caption{Dodawanie warstw PostGIS}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=10cm]{002-dodaj-postgis.png}
+	\caption{Dodawanie warstw PostGIS}
 \end{figure}
-\end{center}
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=11.43cm]{002-dodaj-wms.png}
-\caption{Usługi sieciowe WMS}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=9cm]{002-dodaj-wms.png}
+	\caption{Usługi sieciowe WMS}
 \end{figure}
-\end{center}
-
 Kolejne ikony odpowiadają za otwieranie usług sieciowych WMS, WFS, WCS. Otwarcie takiej warstwy omówimy na przykładzie WMS Mapy topograficznej w Geoporrtalu krajowym.
 
 Po wybraniu \textbf{Dodaj warstwę WMS/WMTS} naszym oczom ukazuje się okno jak na ilustracji poniżej. Wybieramy przycisk Nowy.
 
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=9.931cm]{002-tworzenie-wms.jpg}
-\caption{Tworzenie nowego wpisu dla usługi WMS}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[height=8cm]{002-tworzenie-wms.jpg}
+	\caption{Tworzenie nowego wpisu dla usługi WMS}
 \end{figure}
-\end{center}
-Po wczytaniu z serwera listy warstw, możemy dokonać wyborów warstw, formatu kodowania obrazu (jeśli chcesz uzyskać przezroczystość warstwy WMS, np. w celu wyświetlenia wielu różnych serwisów, skorzystaj z ustawień *PNG/PNG8*). Poniżej istnieje możliwość zmiany układu współrzędnych (a przez to i odwzorowania), z której warto skorzystać, estetyka układu WGS84 odstaje od naszych przyzwyczajeń. Na koniec wybieramy przycisk Dodaj, a po nim Zamknij. Wczytana warstwa WMS pojawi się w oknie mapy, oraz na liście warstw.
+
+Po wczytaniu z serwera listy warstw, możemy dokonać wyborów warstw, formatu kodowania obrazu (jeśli chcesz uzyskać przezroczystość warstwy WMS, np. w celu wyświetlenia wielu różnych serwisów, skorzystaj z ustawień PNG/PNG8). Poniżej istnieje możliwość zmiany układu współrzędnych (a przez to i odwzorowania), z której warto skorzystać, estetyka układu WGS84 odstaje od naszych przyzwyczajeń. Na koniec wybieramy przycisk Dodaj, a po nim Zamknij. Wczytana warstwa WMS pojawi się w oknie mapy, oraz na liście warstw.
 W podobny sposób można dodać warstw danych z usług Web Feature Service, oraz Web Coverage Service.
 
 \subsection{Zapisz jako}
-Gdy zachodzi konieczność zapisania do nowego zbioru danych które utworzyliśmy, dokonaliśmy ich selekcji, lub chcielibyśmy wykonać transformację układu współrzędnych, powinniśmy skorzystać z funkcji **Zapisz jako** dostępnej z menu kontekstowego warstwy - wywołujemy je prawym klawiszem myszy w obrębie listy warstw.
+Gdy zachodzi konieczność zapisania do nowego zbioru danych które utworzyliśmy, dokonaliśmy ich selekcji, lub chcielibyśmy wykonać transformację układu współrzędnych, powinniśmy skorzystać z funkcji Zapisz jako dostępnej z menu kontekstowego warstwy - wywołujemy je prawym klawiszem myszy w obrębie listy warstw.
 
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=8.435cm,height=11.557cm]{002-menu-kontekstowe.jpg}
-\caption{Menu kontekstowe warstwy}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=8cm]{002-menu-kontekstowe.jpg}
+	\caption{Menu kontekstowe warstwy}
 \end{figure}
-\end{center}
-W przypadku warstwy wektorowej po wprowadzeniu nazwu (np. przy użyciu przycisku **Przeglądaj**), oraz wskazaniu
+W przypadku warstwy wektorowej po wprowadzeniu nazwu (np. przy użyciu przycisku Przeglądaj), oraz wskazaniu
 docelowego układu współrzędnych, możemy wybrać również docelowe kodowanie tekstu (preferowane UTF-8), oraz jeśli tworzona wartstwa jest selekcją z innej, powinniśmy zaznaczyć opcję  Zapisz tylko wybrane . Pozostałe pozycje w oknie zależą od kontekstu formatu warstwy wektorowej i mogą pozostać domyślne, \textit{jeśli nie wiesz co oznaczają}.
 
 \begin{figure}[ht]
@@ -370,14 +327,14 @@ docelowego układu współrzędnych, możemy wybrać również docelowe kodowani
 	\caption{Okno zapisu warstwy wektorowej}
 \end{figure}
 
-Dla warstwy rastrowej ilośc opcji jest trochę większa. Możemy między innymi zmienić rozdzielczość warstwy wynikowej, (podaną w jednostkach CRS wybranego powyżej - uwaga przy układach geograficznych, jednostkami są stopnie). Możemy również włączyć kompresję oraz przygotować piramidy skalowe.
+Dla warstwy rastrowej ilość opcji jest trochę większa. Możemy między innymi zmienić rozdzielczość warstwy wynikowej, (podaną w jednostkach CRS wybranego powyżej - uwaga przy układach geograficznych, jednostkami są stopnie). Możemy również włączyć kompresję oraz przygotować piramidy skalowe.
 
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=20.546cm]{002-zapisz-raster.png}
-\caption{Okno zapisu warstwy rastrowej}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=15cm]{002-zapisz-raster.png}
+	\caption{Okno zapisu warstwy rastrowej}
 \end{figure}
-\end{center}
+
 
 \subsection[Nowa warstwa]{Nowa warstwa}
 W QGIS możemy utworzyć nową warstwę danych wektorowych, nie tylko poprzez
@@ -385,12 +342,11 @@ selekcję obiektów z istniejącego zbioru, ale również przy pomocy funkcji \t
 
 Dla warstwy typu ESRI Shapefile należy uzupełnić po kolei parametry warstwy takie jak typ geometrii, kodowanie, CRS, następnie dodać atrybuty (kolumny) do tabeli. Każdorazowo musimy pamiętać o ograniczeniach formatu Shapefile, tj. nazwa atrybutu nie może być dłuższa niż 8 znaków. Po zatwierdzeniu klawiszem OK zostaniemy zapytani o nazwę pliku dla zbioru danych.
 
-\begin{center}
-\begin{figure}
-\includegraphics[width=11.599cm,height=15.579cm]{002-nowy-wektor.jpg}
-\caption{Tworzenie nowej warstwy Shapefile}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=11.599cm,height=15.579cm]{002-nowy-wektor.jpg}
+	\caption{Tworzenie nowej warstwy Shapefile}
 \end{figure}
-\end{center}
 Gdy chcemy obejść ograniczenia formatu Shapefile, QGIS pozwala nam na skorzystanie z warstwy \textit{tymczasowej}. W jej przypadku definiujemy wyłącznie typ geometrii, oraz CRS warstwy. Nie są dokonywane żadne zmiany na dysku, musimy pamiętać o samodzielnym zapisaniu po zakończeniu pracy z warstwą. Aby wykonać więcej  operacji związanych z tworzeniem zbioru danych wetorowych warto skorzystać z wtyczki „Table Manager”.
 
 \chapter{Warstwy wektorowe i CSV}
@@ -982,7 +938,7 @@ W QGIS od wersji 2.14 pojawiło się nowe narzędzie Warstwa wirtualna, które p
 Po otwarciu okna przy pomocy klawisza \textbf{Importuj }dodajemy do warstwy wirtualnej istniejące warstwy danych z projektu. Istnieje również możliwość ich dodania bezpośrednio z dysku, lecz wymaga to ręcznego wpisania pełnej ścieżki dostępu do danych. Następnie w oknie \textbf{Zapytanie }wprowadzamy zapytanie w dialekcie Spatialite. Klawiszem\textbf{ Testuj }możemy sprawdzić poprawność zapytania, a następnie klawiszem \textbf{OK}wykonać operację i dodać wynik do okna głównego.
 
 \chapter{Stylizacja warstw}
-Choć systemy informacji geograficznej, a QGIS nie jest tu wyjątkiem, powstały głównie w celach analitycznych, w ostatnich latach posiadają coraz więcej narzędzi do wizualizacji kartograficznej. W przypadku naszego środowiska te zmiany są szczególnie aktywne w ostatnim okresie i choć wciąż dodawane są nowe moduły dla celów obliczeniowych, głównie w oparciu o Processing, to wysyp funkcjonalności dla kartografów, czyni QGIS'a liderem wśród pakietów open-source.
+Choć systemy informacji geograficznej, a QGIS nie jest tu wyjątkiem, powstały głównie w celach analitycznych \cite{kraak2011cartography}, w ostatnich latach posiadają coraz więcej narzędzi do wizualizacji kartograficznej. W przypadku naszego środowiska te zmiany są szczególnie aktywne w ostatnim okresie i choć wciąż dodawane są nowe moduły dla celów obliczeniowych, głównie w oparciu o Processing, to wysyp funkcjonalności dla kartografów, czyni QGIS'a liderem wśród pakietów open-source.
 
 Aby rozpocząć wizualizację warstwy danych, w panelu warstw prawym klawiszem myszy uzyskujemy dostęp do menu kontekstowego, wybierając \textbf{Właściwości warstwy.}
 
@@ -997,20 +953,19 @@ Aby rozpocząć wizualizację warstwy danych, w panelu warstw prawym klawiszem m
 W otwartym oknie wybieramy zakładkę styl. Od wersji 2.16 możliwe jest również skorzystanie z panelu Styl mapy. Aby go aktywować należy wybrać menu  Widok -{\textgreater} Panele  i odpowiedni panel.
 
 \section{Raster}
-\ \ We właściwościach warstwy rastrowej możemy znaleźć zakładkę Styl w której znajdziemy następujące ustawienia:
+We właściwościach warstwy rastrowej możemy znaleźć zakładkę Styl w której znajdziemy następujące ustawienia:
 
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=2.868cm]{007-raster-tryby.jpg}
-\caption{Tryby renderowania warstwy rastrowej}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=2.5cm]{007-raster-tryby.jpg}
+	\caption{Tryby renderowania warstwy rastrowej}
 \end{figure}
-\end{center}
-\subsection{Kolor wielokanałowy}
-Ta opcja służy do przygotowania wizualizacji obrazów multispektralnych, takich jak zdjęcia satelitarne. W przypadku takich zdjęć wykonywanych w wielu kanałach spektralnych, każdy z kanałów prezentuje 32 bitową paletę odcieni szarości. Dopiero połączenie trzech kanałów powoduje wizualizację w przestrzeni barwnej RGB. ![Właściwości kolor wielokanałowy] (wlasciwosci\_kolor\_wielokanalowy.png)
 
-\ \ Na ilustracji powyżej widzimy przykładowe ustawienia dla obrazów Landsat, z wykorzystaniem obrazowania podczerwieni. Koniecznym jest również wykorzystanie pozycji **Wzmocnienie kontrastu** z ustawieniem **Rozciągnij do min./max.** lub **Rozciągnij i przytnij**. Powodują one zwiększenie kontrastu obrazu.
+\subsection{Kolor wielokanałowy}
+Ta opcja służy do przygotowania wizualizacji obrazów multispektralnych, takich jak zdjęcia satelitarne. W przypadku takich zdjęć wykonywanych w wielu kanałach spektralnych, każdy z kanałów prezentuje 32 bitową paletę odcieni szarości. Dopiero połączenie trzech kanałów powoduje wizualizację w przestrzeni barwnej RGB. 
+
+% Wstawić grafikę Obraz wielokanałowy
+\ \ Na ilustracji powyżej widzimy przykładowe ustawienia dla obrazów Landsat, z wykorzystaniem obrazowania podczerwieni. Koniecznym jest również wykorzystanie pozycji Wzmocnienie kontrastu z ustawieniem Rozciągnij do min./max. lub Rozciągnij i przytnij. Powodują one zwiększenie kontrastu obrazu.
 
 \subsection{Paleta barw}
 Ten tryb pozwala na wczytanie wcześniej przygotowanej palety barwnej.
@@ -1018,117 +973,91 @@ Ten tryb pozwala na wczytanie wcześniej przygotowanej palety barwnej.
 \subsection{Jednokanałowy szary}
 Wizualizacja trybem jednokanałowy-szary może być przydatna dla prezentacji cech o niewielkiej zmienności.
 
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=11.613cm,height=11.01cm]{007-raster-jedno.png}
+\begin{figure}[ht]
+	\centering
+\includegraphics[height=9.0cm]{007-raster-jedno.png}
 \caption{Tryb renderowania jednokanałowego w skali szarości}
 \end{figure}
-\end{center}
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=9.723cm]{007-raster-szary.jpg}
+\begin{figure}[ht]
+	\centering
+\includegraphics[height=9.0cm]{007-raster-szary.jpg}
 \caption{Jednokanałowy szary - wygląd}
 \end{figure}
-\end{center}
 \subsection{Jednokanałowy pseudokolor}
 \ \ Ten typ wizualizacji jest szczególnie przydatny w przypadku numerycznego modelu terenu i jego produktów pochodnych. Możemy dzięki nim przedstawić mapę w postaci hipsometrycznej, czy zaprezentować zjawiska spadków, krzywizn szczególnie intuicyjnymi kolorami.
 
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=9.666cm]{007-raster-pseudo.jpg}
-\caption{Wizualizacja jednokanałowa z paletą barwną}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=9.00cm]{007-raster-pseudo.jpg}
+	\caption{Wizualizacja jednokanałowa z paletą barwną}
 \end{figure}
-\end{center}
+
 W tym przypadku mamy również większy wpływ na ostateczny kształt wizualizacji. Na kolejnych ilustracjach przedstawiona została wizualizacja tego samego zbioru danych, w oparciu o tą samą paletę barwną.
 
-\begin{center}
-\begin{figure}
-\includegraphics[width=17cm,height=11.529cm]{007-raster-dyskretna.png}
+\begin{figure}[!ht]
+	\centering
+\includegraphics[height=10cm]{007-raster-dyskretna.png}
 \caption{Dyskretna paleta barwna}
 \end{figure}
-\end{center}
-\begin{center}
-\begin{figure}
-\includegraphics[width=17cm,height=11.546cm]{007-raster-liniowa.jpg}
+\begin{figure}[!ht]
+	\centering
+\includegraphics[height=10cm]{007-raster-liniowa.jpg}
 \caption{Liniowa paleta barwna}
 \end{figure}
-\end{center}
+
 \subsection{Hillshade renderer}
 Ta opcja dostępna jest wyłącznie od wersji 2.15/2.16 wzwyż. W wcześniejszych wersjach programu konieczne było przygotowanie pliku TIFF wywołując z menu Raster -{\textgreater} Analiza -{\textgreater} Numeryczny Model Terenu. Od wersji 2.16 takie cieniowanie rzeźby terenu może być tworzone dynamicznie, wraz z możliwością dostosowania parametrów wizualizacji w czasie rzeczywistym.
 
 \section{Wektor}
 \ \ Dla warstw wektorowych mamy możliwość skorzystania z wielu różnych rendererów, które umożliwą zaprezentowanie zarówno treści kartogramu, jak i typowej mapy topograficznej.
-
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=7.938cm,height=3.81cm]{007-wektor-tryby.jpg}
-\caption{Tryby wizualizacji wektorowej}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=3.50cm]{007-wektor-tryby.jpg}
+	\caption{Tryby wizualizacji wektorowej}
 \end{figure}
-\end{center}
-
 \subsection{Jeden symbol}
-\ \ Podstawowy sposób wyświetlania nowo otworzonej warstwy. Wszystkie obiekty zostaną wyświetlone identycznym symbolem, który może mieć postać markera punktowego, wypełnień stałych lub gradientowych, obrysów. Każdy z tak utworzonych symboli może być ponownie wykorzystany, również w każdym pozostałym trybie wizualizacji. 
-
+Podstawowy sposób wyświetlania nowo otworzonej warstwy. Wszystkie obiekty zostaną wyświetlone identycznym symbolem, który może mieć postać markera punktowego, wypełnień stałych lub gradientowych, obrysów. Każdy z tak utworzonych symboli może być ponownie wykorzystany, również w każdym pozostałym trybie wizualizacji. 
 \subsection{Wartośc unikalna}
-\ \ Przy pomocy tej funkcji możemy zaprezentować zdefiniowane (dyskretne) wartości atrybutów za pomocą symbolu o zmiennej kolorystyce.
+Przy pomocy tej funkcji możemy zaprezentować zdefiniowane (dyskretne) wartości atrybutów za pomocą symbolu o zmiennej kolorystyce.
 
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=12.746cm]{007-wektor-unikalna.jpg}
-\caption{Wartośc unikalna}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=9.4cm]{007-wektor-unikalna.jpg}
+	\caption{Wartośc unikalna}
 \end{figure}
-\end{center}
-\subsubsection{Symbol stopniowy}
+\subsection{Symbol stopniowy}
 Symbol stopniowy to narzędzie najlepiej zdające egzamin w przypadku tworzenia kartogramów. Jeśli posiadamy warstwę danych, z zbiorem wartości liczbowych, przy pomocy tej metody utworzymy klasy wartości i wyświetlimy je na mapie.
-
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=11.666cm]{007-wektor-stopniowy.png}
-\caption{Symbol stopniowy}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.4]{007-wektor-stopniowy.png}
+	\caption{Symbol stopniowy}
 \end{figure}
-\end{center}
-\ \ Dostępne są tryby dystrybucji w klasach oparte o funkcje statystyczne takie jak kwantyle, czy naturalne przerwy Jenksa. Istnieje również możliwość sterowania przerwami klas przy pomocy histogramu. W tym przypadku konieczne jest użycie przycisku \textbf{Wczytaj wartości} Następnie możemy klikając na histogramie samodzielnie definiować granice klas.
 
-\begin{center}
+\ \ Dostępne są tryby dystrybucji w klasach oparte o funkcje statystyczne takie jak kwantyle, czy naturalne przerwy Jenksa \cite{Jenks}. Istnieje również możliwość sterowania przerwami klas przy pomocy histogramu. W tym przypadku konieczne jest użycie przycisku \textbf{Wczytaj wartości} Następnie możemy klikając na histogramie samodzielnie definiować granice klas.
 \begin{figure}
-\includegraphics[width=10.372cm,height=11.903cm]{007-histogram.png}
-\caption{Dystrybucja wartości w zbiorze}
+	\centering
+	\includegraphics[scale=0.4]{007-histogram.png}
+	\caption{Dystrybucja wartości w zbiorze}
 \end{figure}
-\end{center}
-\subsubsection{Oparta na regułach}
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=9.006cm]{007-reguly.jpg}
-\caption{Wizualizacja oparta na regułach}
+\subsection{Oparta na regułach}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=13cm,height=9.00cm]{007-reguly.jpg}
+	\caption{Wizualizacja oparta na regułach}
 \end{figure}
-\end{center}
-To najbardziej rozbudowany  renderer, oraz w codziennej praktyce kartograficznej, jedyny który pozwoli np. przygotować wizualizację kartograficzną zbliżoną do mapy topograficznej. Pozwala on wykorzystywać wyrażenia QGIS do budowy reguł wyboru elementów do wizualizacji. Dodając nowy element stylu warstwy otwieramy okno edycji, w którym powinniśmy wypełnić conajmniej pole \textit{Filtr}, określające wyrażenie które musi być spełnione, aby wyświetlić dany symbol, ewentualnie \textit{Etykieta}, aby symbol był opisany w panelu warstw, lub w legendzie w komposerze wydruku.
-
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=10.499cm]{007-nowa-regula.jpg}
-\caption{Tworzenie nowej reguły}
+\ \ To najbardziej rozbudowany  renderer, oraz w codziennej praktyce kartograficznej, jedyny który pozwoli np. przygotować wizualizację kartograficzną zbliżoną do mapy topograficznej. Pozwala on wykorzystywać wyrażenia QGIS do budowy reguł wyboru elementów do wizualizacji. Dodając nowy element stylu warstwy otwieramy okno edycji, w którym powinniśmy wypełnić conajmniej pole \textit{Filtr}, określające wyrażenie które musi być spełnione, aby wyświetlić dany symbol, ewentualnie \textit{Etykieta}, aby symbol był opisany w panelu warstw, lub w legendzie w komposerze wydruku.
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=9.00cm]{007-nowa-regula.jpg}
+	\caption{Tworzenie nowej reguły}
 \end{figure}
-\end{center}
+
 W dolnej części okna znajdziemy narzędzia do wyedytowania symbolu z dostępnych elementów. Aby przyspieszyć edycję reguł warto korzystać z generatora wyrażeń znajdującego się po klawiszem  ... .
 
-\begin{center}
 \begin{figure}
 \includegraphics[width=13cm,height=8.107cm]{007-filtr-reguly.jpg}
 \caption{Tworzenie wyrażenia filtra dla reguły}
 \end{figure}
-\end{center}
 W tym oknie w lewej części wprowadzamy wyrażenie, w środkowej znajdują się dostępne funkcje, zaś w prawej możemy znaleźć informacje pomocnicze (opis funkcji, próbka danych, wartości unikalne).
 
 \subsection{Rozsunięcie punktów}
@@ -1165,14 +1094,12 @@ Ta specyficzna forma wizualizacji opiera się na już przygotowanym stylu (przy 
 \end{center}
 W wyniku tej operacji wszystkie elementy naszej wizualizacji o zgodnym filtrze, będą posiadały obrys liniowy (jeśli wybrano), jak również zostaną otoczone kolorem/gradientem wskazanym jako wypełnienie obiektu.
 
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=9.398cm]{007-dopelnienie-wiz.jpg}
-\caption{Dopełnienie poligonów - przykład wizualizacji}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=9.0cm]{007-dopelnienie-wiz.jpg}
+	\caption{Dopełnienie poligonów - przykład wizualizacji}
 \end{figure}
-\end{center}
+
 \subsection{Mapa skupień}
 Określenie \textbf{Mapa Skupień} funkcjonuje również w polskich opracowaniach jako \textbf{Mapa} \textbf{ciepła}, lub metoda Kernel Density \cite{ESRI}. Punktowe wystąpienia zjawiska przetwarzane są na informację barwną o gęstości. Dotychczas konieczne było realizowanie tej funkcji przy pomocy narzędzi z menu  Raster . Obecnie całość zadania możemy zrealizować przy pomocy wyboru odpowiedniego typu renderera.
 
@@ -1219,53 +1146,43 @@ W przypadku składania symboli z wielu elementów, konieczne jest czasami zastos
 
 W otwartym oknie, aktywujemy funkcję i wprowadzamy wartości liczbowe dla kolejności elementów. Wyższa liczba zwiększa priorytet elementu.
 
-
-\begin{center}
-\begin{figure}
+\begin{figure}[!ht]
+	\centering
 \includegraphics[width=8.202cm,height=8.456cm]{007-warstwy-symbolu.jpg}
 \caption{Okno edycji kolejności symbolizacji}
 \end{figure}
-\end{center}
-\begin{center}
-\begin{figure}
-\includegraphics[width=6.301cm,height=11.966cm]{007-warstwy-miejsce.jpg}
-\caption{Dostęp do narzędzia poziomów symboli}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=6.301cm,height=11.966cm]{007-warstwy-miejsce.jpg}
+	\caption{Dostęp do narzędzia poziomów symboli}
 \end{figure}
-\end{center}
-\ \ Po aktywowaniu i przerysowaniu mapy widzimy efekt zmiany - brak czarnych obwódek i nachodzenia symboli niższej kategorii drogi.
+
+Po aktywowaniu i przerysowaniu mapy widzimy efekt zmiany - brak czarnych obwódek i nachodzenia symboli niższej kategorii drogi.
 
 \section{Resource Sharing}
 Nowością od wersji 2.14 jest QGIS Resource Sharing. Jest to wtyczka rozszerzająca możliwości środowiska o korzystanie z zewnętrznych repozytoriów stylu, symboli, modeli i algorytmów dla processingu.  Dzięki zbiorom udostępnianym przez innych użytkowników programu, czy grupę roboczą, możemy rozbudować swój warsztat pracy, czy ujednolicić kolorystykę i stylizację map w organizacji. Po zainstalowaniu, z menu \textit{Wtyczki-Resource Sharing }uruchamiamy główne okno, następnie z zakładki Ustawienia możemy aktywować istniejące domyślne repozytoria, przeładować je w przypadku problemów, dodać, usunąć lub zmodyfikować własne repozytoria. 
 
 \ \ Następnie przechodzimy do zakładki All lub Installed. Tu możemy wybrać z listy istniejących kolekcji interesujące nas i zainstalować je. Po zainstalowaniu dodane symbole pojawiają się w Zarządzaniu Stylem, oraz bezpośrednio w trakcie edycji symbolu.  Cyfrą jeden na ilustracji poniżej oznaczona jest lista dostępnych kolekcji, w sąsiednim oknie znajduje się podgląd wybranej kolekcji, zaś pod cyfrą dwa możliwość jej zainstalowania.
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=16.916cm,height=12.407cm]{007-qrs-u.jpg}
-\caption{QGIS Resource Sharing - Ustawienia}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[height=10cm]{007-qrs-u.jpg}
+	\caption{QGIS Resource Sharing - Ustawienia}
 \end{figure}
-\end{center}
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=16.916cm,height=12.407cm]{007-qrs-kolekcje.jpg}
-\caption{QGIS resource Sharing - Lista kolekcji}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[height=10cm]{007-qrs-kolekcje.jpg}
+	\caption{QGIS resource Sharing - Lista kolekcji}
 \end{figure}
-\end{center}
 \section{Etykiety}
 \ \ Etykietowanie to jedna z najdynamiczniej rozwijających się tematyk w kartografii cyfrowej. Nie inaczej jest w QGIS. Praktycznie z każdą nową wersją programu pojawiają się nowe możliwości. Takie zmiany zaszły również po wydaniu wersji 2.8 LTR, gdy zostało dodane etykietowanie oparte na regułach, oraz lepsze zarządzanie priorytetami etykiet.
 
 \ \ Aby rozpocząć pracę z etykietami, w pierwszej kolejności otwieramy właściwości warstwy i przechodzimy do zakładki \textbf{Etykiety}. Z wybieralnej listy wybieramy opcję etykietowania całej warstw w jednakowy sposób – \textbf{Wyświetlaj etykiety tej warstwy, Etykietowanie oparte na regułach, }analogicznie do reguł stylu oraz\textbf{ Unikaj zakrywania obiektów tej  warstwy przez inne}
 
-
-
-\begin{center}
 \begin{figure}
 \includegraphics[width=13cm,height=8.862cm]{007-etykiety-tryb.jpg}
 \caption{Etykietowanie warstwy - tryby}
 \end{figure}
-\end{center}
+
 Gdy wybraliśmy już tryb etykietowania, wprowadzamy informację o źródle tekstu opisów, do pola \textbf{Etykietuj},pamiętając że\textbf{z}wartością etykiety może być również wyrażenie (np. wskaźnik statystyczny).
 
 
@@ -1296,30 +1213,24 @@ Kolejne zakładki prowadzą nas przez ustawienia \textbf{Otoczki }(efektu halo),
 \end{figure}
 \end{center}
 W zakładce \textbf{Położenie }sterujemy lokalizacją etykiety względem punktu. W wersji 2.16 pojawi się tu nowe ustawienia opisane jako \textbf{kartograficzne},pozwoli ono na ułożenie wszystkich etykiet z zastosowaniem priorytetu lokalizacji, ale z dopuszczeniem innego miejsca, gdy etykieta kolidowałaby z innymi obiektami.
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=10.061cm]{007-etykiety-polozenie.jpg}
-\caption{Etykietowanie - położenie}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=7cm]{007-etykiety-polozenie.jpg}
+	\caption{Etykietowanie - położenie}
 \end{figure}
-\end{center}
+
 Tutaj również ustawiamy priorytet konkretnych etykiet względem siebie.
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=17cm,height=7.832cm]{007-etykiety-priorytet.jpg}
-\caption{Etykietowanie - priorytet pozycji}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=7cm]{007-etykiety-priorytet.jpg}
+	\caption{Etykietowanie - priorytet pozycji}
 \end{figure}
-\end{center}
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=11.846cm]{007-etykiety-render.png}
-\caption{Etykietowanie - Parametry renderowania}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=10cm]{007-etykiety-render.png}
+	\caption{Etykietowanie - Parametry renderowania}
 \end{figure}
-\end{center}
+
 W kolejnej zakładce znajdujemy ustawienia związane głównie z zachowaniem się etykiet, takie jak zakresy skalowe wyświetlania, minimalna i maksymalna wielkość etykiety, obrót, oraz łączenie obiektów przed etykietowaniem (przydatne, np. przy drogach w miastach).
 
 W ostatniej pozycji znajdziemy drugą część sterowania priorytetem etykiety - zachowanie względem przeszkód (inne obiekty).
@@ -1592,7 +1503,7 @@ Przy pomocy pola \textit{filtruj} możemy dodatkowo odsiać elementy które zost
 \end{figure}
 \end{center}
 \end{itemize}
-W tym miejscu warto wspomnieć o jeszcze jednym elemencie związanym z stylizacją warstw. W dziale poświęconym \textbf{Dopełnianiu poligonów }wspominaliśmy\textbf{ }możliwości utworzenia tzw. maski obiektu. W przypadku atlasu ma to praktyczne zastosowanie. Utwórzmy taki styl warstwy, który dla każdego kolejnego arkusza atlasu będzie tworzył kolejną maskę.
+W tym miejscu warto wspomnieć o jeszcze jednym elemencie związanym z stylizacją warstw. W dziale poświęconym \textbf{Dopełnianiu poligonów} wspominaliśmy o możliwości utworzenia tzw. maski obiektu. W przypadku atlasu ma to praktyczne zastosowanie. Utwórzmy taki styl warstwy, który dla każdego kolejnego arkusza atlasu będzie tworzył kolejną maskę.
 
 \begin{figure}
 	\centering
@@ -1621,7 +1532,6 @@ Dodajemy do naszego stylu kolejną regułę o treści \textbf{\$id = @atlasfeatu
 \end{enumerate}
 
 \printbibliography
-\setcounter{tocdepth}{10}
 \renewcommand\contentsname{Spis treści}
 \tableofcontents
 \end{document}
