@@ -546,61 +546,49 @@ Każdorazowo aby móc skorzystać z wyedytowanych danych, konieczne jest ich zap
 \chapter{Rastry}
 \section{Łączenie rastrów}
 \ \ Czasami zdarza się konieczność połączenia dwóch lub więcej zbiorów danych rastrowych. Może to być związane zarówno z potrzebą transformacji do innego układu współrzędnych, jak i połączenia wielu kanałów spektralnych obrazowań satelitarnych do postaci jednego zbioru.
-
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=12.513cm,height=9.338cm]{004-raster-rozne.jpg}
-\caption{Menu Raster - Różne}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[height=8cm]{004-raster-rozne.jpg}
+	\caption{Menu Raster - Różne}
 \end{figure}
-\end{center}
+
 \ \ Wszystkie te zadania możemy wykonać przy pomocy narzędzia znajdującego się w menu \textbf{Raster-{\textgreater}Różne-{\textgreater}Złącz rastry}
 
 \ \ Jeśli zamierzamy wykorzystywać połączone kanały lub zasięgi głównie do wizualizacji, warto zrealizować te zadanie przy pomocy funkcji  Twórz wirtualny raster (VRT) . W ten sposób ilość zajętego miejsca na dysku nie rośnie znacząco.
-
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=10.689cm,height=15.402cm]{004-zlacz-rastry.png}
-\caption{Operacja Złącz Rastry}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[height=13cm]{004-zlacz-rastry.png}
+	\caption{Operacja Złącz Rastry}
 \end{figure}
-\end{center}
+
 Jeśli zamierzamy łączyć wiele rastrów znajdujących się w jednym katalogu, zaznaczamy pierwsze pole, następnie wskazujemy pliki/katalog źródłowy, ścieżkę do pliku wynikowego w którym zamierzamy zapisać. Kolejna ważna pozycja to  Place each input file into a seperate band  (Umieść każdy z plików w osobnym kanale). Używamy jej wyłącznie przy łączeniu wielu kanałów zobrazowań w jeden zbiór. W przypadku łączenia NMT, to pole powinno pozostać niezaznaczone.
 
 \section{Kadrowanie rastrów}
 \ \ Operacje na rastrach są dość obciążające obliczeniowo. Jeśli tylko jesteśmy w stanie, powinniśmy ograniczać wielkość zbioru rastrowego do niezbędnego minimum. Jednym ze sposobów jest ograniczanie zasięgu przestrzennego, przy pomocy narzędzi kadrowania rastrów. Narzędzia te znajdziemy w menu  Raster-{\textgreater}Cięcie .
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=10.111cm,height=7.542cm]{004-raster-ciecie.png}
-\caption{Menu Raster - Cięcie}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[height=7cm]{004-raster-ciecie.png}	
+	\caption{Menu Raster - Cięcie}
 \end{figure}
-\end{center}
 
-\begin{center}
 \begin{figure}
-\includegraphics[width=13cm,height=7.091cm]{004-raster-kadrowanie.jpg}
+\includegraphics[height=7cm]{004-raster-kadrowanie.jpg}
 \caption{Kadrowanie zasięgiem}
 \end{figure}
-\end{center}
+
 \ \ W przypadku wyboru trybu kadrowania \textbf{Zasięg} należy pamiętać o ustawieniu układu CRS projektu zgodnego z układem warstwy rastrowej. Dla kadrowania przy pomocy \textbf{Warstwa maski} warstwa wektorowa musi mieć ten sam układ co raster, dla projektu możemy pozostawić układ wybrany do wizualizacji.
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=15.452cm,height=13.229cm]{004-raster-maska.png}
-\caption{Kadrowanie maską}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[height=9cm]{004-raster-maska.png}
+	\caption{Kadrowanie maską}
 \end{figure}
-\end{center}
+
 Przydatnym jest również możliwość zdefiniowania wartości NODATA, oraz tworzenie kanału alfa (przezroczystości). Przykład takiego pliku na ilustracji.
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=7.796cm]{004-raster-alfa.jpg}
-\caption{Kadrowanie maską z kanałem alfa} \label{fig:maskaalfa}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[height=7cm]{004-raster-alfa.jpg}
+	\caption{Kadrowanie maską z kanałem alfa} \label{fig:maskaalfa}
 \end{figure}
-\end{center}
 
 \section{Opracowania multispektralne}
 \ \ Przykładem wykorzystania obrazowań multispektralnych jest między innymi współczynnik NDVI. W QGIS można by go obliczać przy pomocy kalkulatora rastrów, lecz dużo praktyczniej skorzystać z gotowych narzędzi z pakietu SAGA.
@@ -941,83 +929,77 @@ Po otwarciu okna przy pomocy klawisza \textbf{Importuj }dodajemy do warstwy wirt
 Choć systemy informacji geograficznej, a QGIS nie jest tu wyjątkiem, powstały głównie w celach analitycznych \cite{kraak2011cartography}, w ostatnich latach posiadają coraz więcej narzędzi do wizualizacji kartograficznej. W przypadku naszego środowiska te zmiany są szczególnie aktywne w ostatnim okresie i choć wciąż dodawane są nowe moduły dla celów obliczeniowych, głównie w oparciu o Processing, to wysyp funkcjonalności dla kartografów, czyni QGIS'a liderem wśród pakietów open-source.
 
 Aby rozpocząć wizualizację warstwy danych, w panelu warstw prawym klawiszem myszy uzyskujemy dostęp do menu kontekstowego, wybierając \textbf{Właściwości warstwy.}
-
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=11.596cm,height=12.771cm]{007-kontekstowe.jpg}
-\caption{Menu kontekstowe - Właściwości warstwy}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[height=9cm]{007-kontekstowe.jpg}
+	\caption{Menu kontekstowe - Właściwości warstwy}
 \end{figure}
-\end{center}
-W otwartym oknie wybieramy zakładkę styl. Od wersji 2.16 możliwe jest również skorzystanie z panelu Styl mapy. Aby go aktywować należy wybrać menu  Widok -{\textgreater} Panele  i odpowiedni panel.
 
+W otwartym oknie wybieramy zakładkę styl. Od wersji 2.16 możliwe jest również skorzystanie z panelu Styl mapy. Aby go aktywować należy wybrać menu  Widok -{\textgreater} Panele  i odpowiedni panel. Praca w zakładce Styl warstwy nie odbiega od metod opisanych poniżej.
 \section{Raster}
 We właściwościach warstwy rastrowej możemy znaleźć zakładkę Styl w której znajdziemy następujące ustawienia:
-
 \begin{figure}[ht]
 	\centering
 	\includegraphics[height=2.5cm]{007-raster-tryby.jpg}
 	\caption{Tryby renderowania warstwy rastrowej}
 \end{figure}
-
 \subsection{Kolor wielokanałowy}
 Ta opcja służy do przygotowania wizualizacji obrazów multispektralnych, takich jak zdjęcia satelitarne. W przypadku takich zdjęć wykonywanych w wielu kanałach spektralnych, każdy z kanałów prezentuje 32 bitową paletę odcieni szarości. Dopiero połączenie trzech kanałów powoduje wizualizację w przestrzeni barwnej RGB. 
-
-% Wstawić grafikę Obraz wielokanałowy
-\ \ Na ilustracji powyżej widzimy przykładowe ustawienia dla obrazów Landsat, z wykorzystaniem obrazowania podczerwieni. Koniecznym jest również wykorzystanie pozycji Wzmocnienie kontrastu z ustawieniem Rozciągnij do min./max. lub Rozciągnij i przytnij. Powodują one zwiększenie kontrastu obrazu.
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[height=6cm]{007-kolor-multiband.png}
+	\caption{Tryby renderowania warstwy rastrowej}
+\end{figure}
+\ \ Na ilustracji powyżej widzimy przykładowe ustawienia dla obrazów Sentinel, z wykorzystaniem obrazowania podczerwieni. Koniecznym jest również wykorzystanie pozycji Wzmocnienie kontrastu z ustawieniem \textbf{Rozciągnij do min./max.} lub \textbf{Rozciągnij i przytnij}. Powodują one zwiększenie kontrastu obrazu.
 
 \subsection{Paleta barw}
 Ten tryb pozwala na wczytanie wcześniej przygotowanej palety barwnej.
 
 \subsection{Jednokanałowy szary}
 Wizualizacja trybem jednokanałowy-szary może być przydatna dla prezentacji cech o niewielkiej zmienności.
-
-\begin{figure}[ht]
+\begin{figure}[!ht]
 	\centering
-\includegraphics[height=9.0cm]{007-raster-jedno.png}
-\caption{Tryb renderowania jednokanałowego w skali szarości}
+	\includegraphics[height=7cm]{007-raster-jedno.png}
+	\caption{Tryb renderowania jednokanałowego w skali szarości}
 \end{figure}
-\begin{figure}[ht]
+\begin{figure}[!ht]
 	\centering
-\includegraphics[height=9.0cm]{007-raster-szary.jpg}
-\caption{Jednokanałowy szary - wygląd}
+	\includegraphics[height=7cm]{007-raster-szary.jpg}
+	\caption{Jednokanałowy szary - wygląd}
 \end{figure}
 \subsection{Jednokanałowy pseudokolor}
-\ \ Ten typ wizualizacji jest szczególnie przydatny w przypadku numerycznego modelu terenu i jego produktów pochodnych. Możemy dzięki nim przedstawić mapę w postaci hipsometrycznej, czy zaprezentować zjawiska spadków, krzywizn szczególnie intuicyjnymi kolorami.
-
+Ten typ wizualizacji jest szczególnie przydatny w przypadku numerycznego modelu terenu i jego produktów pochodnych. Możemy dzięki nim przedstawić mapę w postaci hipsometrycznej, czy zaprezentować zjawiska spadków, krzywizn szczególnie intuicyjnymi kolorami.
 \begin{figure}[ht]
 	\centering
-	\includegraphics[height=9.00cm]{007-raster-pseudo.jpg}
+	\includegraphics[height=8cm]{007-raster-pseudo.jpg}
 	\caption{Wizualizacja jednokanałowa z paletą barwną}
 \end{figure}
 
 W tym przypadku mamy również większy wpływ na ostateczny kształt wizualizacji. Na kolejnych ilustracjach przedstawiona została wizualizacja tego samego zbioru danych, w oparciu o tą samą paletę barwną.
-
 \begin{figure}[!ht]
 	\centering
-\includegraphics[height=10cm]{007-raster-dyskretna.png}
+\includegraphics[height=7cm]{007-raster-dyskretna.png}
 \caption{Dyskretna paleta barwna}
 \end{figure}
 \begin{figure}[!ht]
 	\centering
-\includegraphics[height=10cm]{007-raster-liniowa.jpg}
+\includegraphics[height=7cm]{007-raster-liniowa.jpg}
 \caption{Liniowa paleta barwna}
 \end{figure}
 
 \subsection{Hillshade renderer}
-Ta opcja dostępna jest wyłącznie od wersji 2.15/2.16 wzwyż. W wcześniejszych wersjach programu konieczne było przygotowanie pliku TIFF wywołując z menu Raster -{\textgreater} Analiza -{\textgreater} Numeryczny Model Terenu. Od wersji 2.16 takie cieniowanie rzeźby terenu może być tworzone dynamicznie, wraz z możliwością dostosowania parametrów wizualizacji w czasie rzeczywistym.
+Ta opcja dostępna jest wyłącznie od wersji 2.16 wzwyż. W wcześniejszych wersjach programu konieczne było przygotowanie pliku TIFF wywołując z menu Raster -{\textgreater} Analiza -{\textgreater} Numeryczny Model Terenu. Od wersji 2.16 takie cieniowanie rzeźby terenu może być tworzone dynamicznie, wraz z możliwością dostosowania parametrów wizualizacji w czasie rzeczywistym.
 
 \section{Wektor}
-\ \ Dla warstw wektorowych mamy możliwość skorzystania z wielu różnych rendererów, które umożliwą zaprezentowanie zarówno treści kartogramu, jak i typowej mapy topograficznej.
-\begin{figure}[ht]
+Dla warstw wektorowych mamy możliwość skorzystania z wielu różnych rendererów, które umożliwą zaprezentowanie zarówno treści kartogramu, jak i typowej mapy topograficznej.
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[height=3.50cm]{007-wektor-tryby.jpg}
 	\caption{Tryby wizualizacji wektorowej}
 \end{figure}
 \subsection{Jeden symbol}
 Podstawowy sposób wyświetlania nowo otworzonej warstwy. Wszystkie obiekty zostaną wyświetlone identycznym symbolem, który może mieć postać markera punktowego, wypełnień stałych lub gradientowych, obrysów. Każdy z tak utworzonych symboli może być ponownie wykorzystany, również w każdym pozostałym trybie wizualizacji. 
-\subsection{Wartośc unikalna}
+\subsection{Wartość unikalna}
 Przy pomocy tej funkcji możemy zaprezentować zdefiniowane (dyskretne) wartości atrybutów za pomocą symbolu o zmiennej kolorystyce.
 
 \begin{figure}[ht]
@@ -1033,11 +1015,24 @@ Symbol stopniowy to narzędzie najlepiej zdające egzamin w przypadku tworzenia 
 	\caption{Symbol stopniowy}
 \end{figure}
 
-\ \ Dostępne są tryby dystrybucji w klasach oparte o funkcje statystyczne takie jak kwantyle, czy naturalne przerwy Jenksa \cite{Jenks}. Istnieje również możliwość sterowania przerwami klas przy pomocy histogramu. W tym przypadku konieczne jest użycie przycisku \textbf{Wczytaj wartości} Następnie możemy klikając na histogramie samodzielnie definiować granice klas.
+\ \ Dostępne są tryby dystrybucji w klasach oparte o funkcje statystyczne takie jak kwantyle, naturalne przerwy Jenksa \cite{Jenks}, czy "ładny podział" \cite{pretty}. Istnieje również możliwość sterowania przerwami klas przy pomocy histogramu. W tym przypadku konieczne jest użycie przycisku \textbf{Wczytaj wartości} Następnie możemy klikając na histogramie samodzielnie definiować granice klas.
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.4]{007-histogram.png}
 	\caption{Dystrybucja wartości w zbiorze}
+\end{figure}
+\subsection{Symbol proporcjonalny}
+Zarówno w przypadku każdej z opisanych wcześniej metod istnieje dodatkowa możliwość wykorzystania tzw. \textbf{Width Assistant}. Dzięki niemu możemy uzależnić wielkość symbolu od atrybutu z tabeli danych lub wyrażenia.  Stąd już o krok do analizy wielowymiarowej i wykorzystania zmiennych wizualnych \cite{kraak2011cartography}.
+Po utworzeniu podstawowego sposobu wizualizacji wybieramy styl symbolu podstawowego, a następnie po prawej stronie pola odpowiadającego za rozmiar symbolu (szerokość linii, etc.) rozwijamy menu oznaczone cyfrą (jeden) na ilustracji \ref{fig:width-ass}. Z listy rozwijanej wybieramy Width/Size Assistant i w nowo otwartym oknie dostosowujemy parametry wizualizacji. Po prawej, oznaczone cyfrą (dwa) znajdziemy możliwość utworzenia wyrażenia opartego o dane, na naszej ilustracji jest to długość obiektu.  
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[height=2cm]{007-edycja-symbolu-podstawowego}
+	\caption{Edycja symbolu podstawowego}
+\end{figure}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[height=7cm]{007-width-assistant}
+	\caption{Asystent rozmiaru}\label{fig:width-ass}
 \end{figure}
 \subsection{Oparta na regułach}
 \begin{figure}[!ht]
@@ -1053,45 +1048,34 @@ Symbol stopniowy to narzędzie najlepiej zdające egzamin w przypadku tworzenia 
 \end{figure}
 
 W dolnej części okna znajdziemy narzędzia do wyedytowania symbolu z dostępnych elementów. Aby przyspieszyć edycję reguł warto korzystać z generatora wyrażeń znajdującego się po klawiszem  ... .
-
-\begin{figure}
-\includegraphics[width=13cm,height=8.107cm]{007-filtr-reguly.jpg}
+\begin{figure}[!ht]
+	\centering
+\includegraphics[height=8cm]{007-filtr-reguly.jpg}
 \caption{Tworzenie wyrażenia filtra dla reguły}
 \end{figure}
 W tym oknie w lewej części wprowadzamy wyrażenie, w środkowej znajdują się dostępne funkcje, zaś w prawej możemy znaleźć informacje pomocnicze (opis funkcji, próbka danych, wartości unikalne).
 
 \subsection{Rozsunięcie punktów}
 Ten rodzaj renderera wykorzystywany jest wyłącznie w przypadku warstw o charakterze punktowym, dla których pojawia się wiele punktów o identycznej/bardzo zbliżonej geometrii. W ramach ustawień wizualizacji definiujemy symbol środkowy, oraz promień okręgu na którym zostaną dodane rozsunięte symbole pojedyńcze.
-
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=8.946cm]{007-rozsuniecie.jpg}
-\caption{Ustawienia dla stylu rozsunięcie punktów}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[height=7cm]{007-rozsuniecie.jpg}
+	\caption{Ustawienia dla stylu rozsunięcie punktów}
 \end{figure}
-\end{center}
 W polu \textbf{Point distance tolerance} definiujemy odległość pomiędzy sąsiadującymi punktami, które mają być traktowane jako nachodzące na siebie. W polu \textbf{Szerokość i obrys} kolejnych definiujemy wygląd okręgu na którym umieszczone zostaną symbole punktowe. W pozycji \textbf{Center} \textbf{symbol} możemy wskazać symbol znajdujący się w środku okręgu dla wyróżnienia wizualizacji.
-
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=6.689cm]{007-rozs-wiz.jpg}
-\caption{Rozsunięcie punktów przykład wizualizacji}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[height=6cm]{007-rozs-wiz.jpg}
+	\caption{Rozsunięcie punktów przykład wizualizacji}
 \end{figure}
-\end{center}
 \subsection{Dopełnienie poligonów}
 Ta specyficzna forma wizualizacji opiera się na już przygotowanym stylu (przy wykorzystaniu dowolnego innego renderera. Najpraktyczniejszym jej zastosowaniem jest tworzenie masek zakrywających nieistotną z naszego punktu widzenia treść, bez ingerencji w dane źródłowe. Zaprezentujemy na przykładzie granic administracyjnych.
-
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=6.798cm]{007-dopelnienie-konf.jpg}
-\caption{Dopełnienie poligonów - konfiguracja}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[height=6cm]{007-dopelnienie-konf.jpg}
+	\caption{Dopełnienie poligonów - konfiguracja}
 \end{figure}
-\end{center}
+
 W wyniku tej operacji wszystkie elementy naszej wizualizacji o zgodnym filtrze, będą posiadały obrys liniowy (jeśli wybrano), jak również zostaną otoczone kolorem/gradientem wskazanym jako wypełnienie obiektu.
 
 \begin{figure}[ht]
@@ -1101,26 +1085,21 @@ W wyniku tej operacji wszystkie elementy naszej wizualizacji o zgodnym filtrze, 
 \end{figure}
 
 \subsection{Mapa skupień}
-Określenie \textbf{Mapa Skupień} funkcjonuje również w polskich opracowaniach jako \textbf{Mapa} \textbf{ciepła}, lub metoda Kernel Density \cite{ESRI}. Punktowe wystąpienia zjawiska przetwarzane są na informację barwną o gęstości. Dotychczas konieczne było realizowanie tej funkcji przy pomocy narzędzi z menu  Raster . Obecnie całość zadania możemy zrealizować przy pomocy wyboru odpowiedniego typu renderera.
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=9.006cm]{007-heatmap-u.jpg}
-\caption{Mapa skupień - ustawienia}
+Określenie \textbf{Mapa Skupień} funkcjonuje również w opracowaniach jako \textbf{Mapa ciepła} - heatmap \cite{Pettit2012}, lub metoda Kernel Density \cite{Meier2014}. Punktowe wystąpienia zjawiska przetwarzane są na informację barwną o gęstości. Dotychczas konieczne było realizowanie tej funkcji przy pomocy narzędzi z menu  Raster . Obecnie całość zadania możemy zrealizować przy pomocy wyboru odpowiedniego typu renderera.
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[height=8cm]{007-heatmap-u.jpg}
+	\caption{Mapa skupień - ustawienia}
 \end{figure}
-\end{center}
+
 W oknie dialogowym ustawiamy kolorystykę, następnie wartość \textbf{Promień}(im mniejsza tym bardziej szczegółowo widać sąsiadujące punkty, oraz \textbf{Waga z atrybutu} który pozwala jeszcze wyróżnić konkretny typ zjawiska.
-
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=13cm,height=7.747cm]{007-heatmap-w.jpg}
-\caption{Mapa skupień - przykład wizualizacji}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[height=7cm]{007-heatmap-w.jpg}
+	\caption{Mapa skupień - przykład wizualizacji}
 \end{figure}
-\end{center}
 
-\subsection[2.5D]{2.5D}
+\subsection{2.5D}
 Ten typ wizualizacji pozwala przedstawić obiekty warstwy wektorowej w postaci pseudo trójwymiarowej (w rzucie izometrycznym), wraz z cieniowaniem. Ustawienia konfiguracyjne pozwalają na zmianę wysokości, również sterowaną atrybutem (np. ilości kondygnacji).
 
 \begin{center}
@@ -1135,12 +1114,12 @@ Ten typ wizualizacji pozwala przedstawić obiekty warstwy wektorowej w postaci p
 
 \ \ Aby rozpocząć edycję nowego generatora w otwartej zakładce/oknie edycji symbolu z listy Typ warstwy symbolu wybieramy geometry generator,  a następnie wprowadzamy regułę dla geometrii w dolnym oknie. Następnie możemy zadbać o szczegóły graficzne stworzonego elementu. Na ilustracji poniżej możemy zobaczyć wygenerowane tą metodą linie przepływu, które aby nie zaciemniać obrazu są skracane o promień koła do którego dochodzą. Samo koło również tworzone jest generatorem jako bufor wokół punktu końcowego linii, Jak widać nasze możliwości ograniczone są naszą wyobraźnią.
 
-\begin{center}
-\begin{figure}
-\includegraphics[width=16.916cm,height=9.308cm]{007-generator.jpg}
-\caption{Geometry generator}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[height=8cm]{007-generator.jpg}
+	\caption{Geometry generator}
 \end{figure}
-\end{center}
+
 \section{Kolejność wyświetlania symboli}
 W przypadku składania symboli z wielu elementów, konieczne jest czasami zastosowanie funkcjonalności  Kolejność wyświetlania symboli. Szczególnie widoczne jest to przy wizualizacji sieci drogowej, gdy chcemy skorzystać z graficznego wyróżnienia klas drogi jej zewnętrznym obrysem. Dostęp do narzędzia uzyskujemy w dolnej części okna stylu mapy, pod regułami, rozwijając menu \textbf{Zaawansowane}.
 
